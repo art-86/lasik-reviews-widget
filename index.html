@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Отзывы на Яндекс Картах</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fafcf9;color:#181818;font-family:Arial,sans-serif}
+.stage{position:relative;width:min(100%,106.89svh,960px);aspect-ratio:714/668;margin:auto;background:#fafafa;overflow:hidden;isolation:isolate;container-type:inline-size}
+.screen{position:absolute;left:35.59%;top:10.03%;width:34.87%;height:73%;background:white;border-radius:17.9px 17.9px 0 0;overflow:hidden;display:flex;flex-direction:column;font-size:16.1px}
+.title,.tabs,.counts,header,.details{display:flex;align-items:center}.title{padding:17.9px 14.5px 8.9px;gap:11.2px;font-size:17.9px}.title strong{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}.title a,.tabs a{text-decoration:none;color:inherit}.title a{color:#aaa}
+.tabs{justify-content:space-between;gap:5.6px;padding:11.2px 10.1px;font-size:12.9px;font-weight:bold}.tabs strong{border-bottom:3.9px solid #287de4;color:#1667b8;padding-bottom:5.6px}.tabs small{color:#777}.counts{justify-content:space-between;padding:12.3px 15.1px;font-size:15.1px}.counts span{color:#888;font-size:12.6px}
+.scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:none;border-block:1px solid #f3f3f3}.scroll::-webkit-scrollbar{display:none}
+article{padding:20.1px 15.1px 19px;border-bottom:1px solid #f2f2f2}header{gap:8.9px}.avatar{border-radius:50%;width:38px;height:38px;background:#e7f2f0;color:#47716b;display:grid;place-items:center;font-weight:bold}.details{gap:6.7px;margin:11.2px 0 5px}.details b{color:#ffc600}.details small,#status{color:#767676}article p{white-space:pre-line;line-height:1.25;margin:0;overflow-wrap:anywhere}
+footer{padding:8.9px 15.1px}footer a{display:inline-block;background:#1977f3;color:white;padding:11.2px 14.5px;border-radius:13.4px;text-decoration:none;font-size:14.5px}
+#more{font:inherit}#status{padding:8.9px}
+@media(max-width:600px){body{overflow-x:hidden}.stage{width:min(240vw,106.89svh);max-width:none;left:50%;transform:translateX(-50%);margin:0}}
+@font-face{font-family:'YS Text';src:url(https://maps.yastatic.net/s3/home/fonts/ys/4/text-regular.woff2)}@font-face{font-family:'YS Text';font-weight:500 700;src:url(https://maps.yastatic.net/s3/home/fonts/ys/4/text-medium.woff2)}
+.screen{font-family:'YS Text',Arial,Helvetica,sans-serif}.scroll{touch-action:pan-y;scroll-behavior:auto}
+article{padding:24px 15.1px;border:0;font-size:16px;line-height:20px}article+article{border-top:1px solid #f6f6f6}header{gap:12px}.avatar{width:40px;height:40px;flex:none;object-fit:cover}
+.identity{min-width:0;flex:1}.identity>*{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.identity strong{font-weight:500}.identity small,.details small{color:#888;font-size:14px;line-height:16px}.details{margin:16px 0 7.9px;gap:7.9px}.details b{letter-spacing:-1.3px;font:18.5px/1 Arial;color:#ffcc00}article{padding-inline:16px}article p{font:400 16px/20px 'YS Text',Arial,Helvetica,sans-serif;color:#000}.details{margin-bottom:8px}.actions{margin-top:16px}.collapsed{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:5;overflow:hidden}
+.expand,.share{font:inherit;border:none;background:none;color:#858585;padding:0;cursor:pointer}.actions{display:flex;align-items:center;gap:16.8px;margin-top:16px;color:#888}.actions a,.share{color:inherit;text-decoration:none;display:flex;align-items:center;gap:3.9px;font-size:13.9px}.actions svg{width:21.8px;height:21.8px;fill:currentColor}.topics{display:flex;gap:7.8px;overflow:auto;scrollbar-width:none;padding:5.6px 15.1px 12.3px}.topics div{flex:none;background:#f6f6f4;padding:7.3px 10.1px;border-radius:8.4px;font-size:13.2px;font-weight:500}.topics em{color:#598a32;font-style:normal}.topics small{display:block;color:#888;font-weight:400}.answer{margin-top:11.2px;color:#555}.answer summary{cursor:pointer}
+.topics{flex:none;gap:8.1px;overscroll-behavior-x:contain}.topics div{background:#f6f6f6;border-radius:15.1px;padding:11.7px;line-height:17.3px}.topics em{color:#43a014}.topics svg{width:12.3px;height:12.3px;fill:currentColor}.topics small{margin-top:2.8px}.topics{min-width:0;max-width:100%;overflow-x:auto;overflow-y:hidden;touch-action:pan-x;cursor:grab;user-select:none}.topics.dragging{cursor:grabbing}.glass{position:absolute;left:35.59%;top:10.03%;width:34.87%;height:73%;overflow:hidden;border-radius:1.6cqw 1.6cqw 0 0}
+.screen{position:static;width:390px;height:100%;transform-origin:top left;border-radius:0}
+.title strong{white-space:normal;overflow:visible;flex:none;max-width:100%;font-size:18px;line-height:23px}
+.title a{display:inline-block;vertical-align:super;color:white;background:#49ad19;border-radius:50%;font:700 9px/11px Arial;text-align:center;width:11px;height:11px;margin-left:4px}
+article,.identity strong,article p{font-size:16px;line-height:20px}.identity small,.details small{font-size:14px;line-height:16px}.details b{font-size:18px}.avatar{width:40px;height:40px}
+.rating-box{margin:10px 16px;display:flex;align-items:stretch;background:#f4f4f4;border-radius:12px;flex:none}.rating-box[hidden]{display:none}.score,.rate{display:flex;align-items:center;gap:10px;padding:14px 12px}.score strong{font-size:38px}.score span,.rate{font-size:13px;line-height:16px}.score b,.rate b{display:block;font-size:16px;color:#ffca00}.rate{flex:1;border-left:1px solid #e6e6e6;text-decoration:none;color:inherit;justify-content:center}.rate b{color:#c9c9c9}
+.stage:before{content:"";position:absolute;inset:21% 11% -8% 21%;border:2.15cqw solid #1d376d;border-radius:1.5cqw;z-index:-2}
+.stage:after{content:"";position:absolute;left:26%;top:4%;width:74%;aspect-ratio:500/684;background:url("./phone-original.png") top left/100% auto no-repeat;z-index:-1}
+.glass{left:35.55%;top:5.65%;width:34.72%;height:80.6%;border-radius:4.5cqw;clip-path:inset(0 round 4.5cqw);background:#fff}
+.screen:before{content:"Я Карты";background:#171717;color:white;text-align:center;padding:5px;font-size:12px;font-weight:500;flex:none}
+.screen:after{content:"";height:4px;width:34%;margin:5px auto 8px;background:#151515;border-radius:4px;flex:none}
+</style>
+<template id="like"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M22 11.5c0-2.097-1.228-3.498-3.315-3.498h-2.918Q15.9 6.624 15.9 5.5c0-1.963-1.81-3.5-3.64-3.5-1.414 0-1.81.81-2.049 2.683-.003.03-.094.762-.125.995-.055.407-.112.77-.182 1.133-.273 1.414-.989 2.944-1.727 3.841a2.3 2.3 0 0 0-.456-.318C7.314 10.116 6.838 10 6.153 10h-.306c-.685 0-1.16.116-1.568.334a2.27 2.27 0 0 0-.945.945c-.218.407-.334.883-.334 1.568v5.306c0 .685.116 1.16.334 1.568.218.407.538.727.945.945S5.162 21 5.847 21h.306c.685 0 1.16-.116 1.568-.334q.353-.19.615-.477c.697.525 1.68.811 2.985.811h4.452c1.486 0 2.565-.553 3.253-1.487.284-.384.407-.652.597-1.166a.8.8 0 0 1 .162-.214c.026-.028.11-.112.208-.21.135-.134.296-.295.369-.373.323-.346.576-.69.782-1.103.357-.713.406-1.258.337-2.173-.026-.35-.027-.464-.008-.542.034-.145.075-.265.147-.447l.066-.166c.22-.552.314-.971.314-1.619m-9.932-5.555c.034-.251.129-1.018.127-1.009.062-.483.114-.768.168-.932.76.059 1.537.75 1.537 1.496q0 1.433-.242 3.378a1 1 0 0 0 .992 1.124h4.035c.92 0 1.315.451 1.315 1.498 0 .37-.04.547-.173.881l-.066.167a5 5 0 0 0-.234.72c-.084.356-.083.586-.04 1.156.044.582.022.822-.131 1.129a2.6 2.6 0 0 1-.455.63c-.04.044-.148.152-.262.266-.129.128-.265.264-.319.322-.266.286-.451.554-.573.882-.128.345-.192.486-.33.674-.314.425-.798.673-1.644.673H11.32c-1.833 0-2.317-.568-2.317-2v-4.35c1.31-1.104 2.458-3.356 2.864-5.46.077-.405.14-.803.2-1.245m-6.846 6.153c.116-.062.278-.098.625-.098h.306c.347 0 .509.036.625.098a.28.28 0 0 1 .124.124c.062.116.098.277.098.625v5.306c0 .348-.036.509-.098.625a.28.28 0 0 1-.124.125c-.116.061-.278.097-.625.097h-.306c-.347 0-.509-.036-.625-.098a.28.28 0 0 1-.124-.124C5.036 18.662 5 18.5 5 18.153v-5.306c0-.348.036-.509.098-.625a.28.28 0 0 1 .124-.124" clip-rule="evenodd"/></svg></template><template id="share"><svg width="24" height="24"></svg></template><main class="stage"><div class="glass"><section class="screen" aria-label="Отзывы в экране телефона">
+<div class="title"><strong><span id="org-name">Отзывы</span> <span style="white-space:nowrap"><a href="https://yandex.ru/maps/org/1012232570/" target="_blank" aria-label="Открыть карточку">↗</a></span></strong></div>
+<nav class="tabs"><a href="https://yandex.ru/maps/org/1012232570/" target="_blank">Обзор</a><a href="https://yandex.ru/maps/org/1012232570/prices/" target="_blank">Товары и услуги</a><a href="https://yandex.ru/maps/org/1012232570/gallery/" target="_blank">Фото</a><strong>Отзывы <small id="count"></small></strong></nav>
+<div id="ratingBox" class="rating-box" hidden><div class="score"><strong id="score"></strong><span><b aria-hidden="true">★★★★★</b><span id="votes"></span></span></div><a class="rate" target="_blank" href="https://yandex.ru/maps/org/1012232570/reviews/"><span>Оцените<br>это место</span><b aria-hidden="true">★★★★★</b></a></div><div class="counts"><strong id="total">Отзывы</strong></div>
+<div id="topics" class="topics" tabindex="0" role="region" aria-label="Темы отзывов"></div><div class="scroll" tabindex="0" aria-label="Лента отзывов"><section id="feed"></section><small id="status" role="status">Загружаем отзывы…</small> <button id="more">Показать еще</button></div>
+<footer><a href="https://yandex.ru/maps/org/1012232570/reviews/" target="_blank">✎ Добавить отзыв</a></footer></section></div>
+</main><script type="module">
+const params = new URLSearchParams(location.search);
+const org = params.get('org') ?? '1012232570';
+const validOrg = /^\d{1,20}$/.test(org);
+for (const link of document.querySelectorAll('a[href*="/maps/org/1012232570/"]')) {
+  if (validOrg) link.href = link.href.replace('/1012232570/', '/' + org + '/');
+  else link.removeAttribute('href');
+}
+const glass = document.querySelector('.glass');
+const screen = glass.querySelector('.screen');
+function fitScreen() {
+  const scale = glass.clientWidth / 390;
+  if (!scale) return;
+  screen.style.transform = 'scale(' + scale + ')';
+  screen.style.height = glass.clientHeight / scale + 'px';
+}
+fitScreen();
+new ResizeObserver(fitScreen).observe(glass);
+const feed = document.querySelector('#feed');
+const status = document.querySelector('#status');
+const more = document.querySelector('#more');
+let offset = 0;
+let loading = false;
+const seen = new Set();
+async function load() {
+  if (loading || offset === null) return;
+  loading = true;
+  more.disabled = true;
+  try {
+  if (!validOrg) throw new Error();
+  const response = await fetch('./feed/' + org + '/' + offset + '.json');
+  if (response.status === 404) {
+    status.textContent = 'Эта организация еще не подключена.';
+    more.hidden = true;
+    offset = null;
+    return;
+  }
+  if (!response.ok) throw new Error();
+  const { name, reviews, next, total, available, aspects, rating } = await response.json();
+  document.querySelector('#org-name').textContent = name;
+  document.title = 'Отзывы — ' + name;
+  if (rating?.ratingValue && Number.isFinite(rating.ratingCount)) {
+    const n = rating.ratingCount;
+    document.querySelector('#score').textContent = Number(rating.ratingValue).toLocaleString('ru-RU',{minimumFractionDigits:1,maximumFractionDigits:1});
+    document.querySelector('#votes').textContent = n + ' ' + ({one:'оценка',few:'оценки',many:'оценок'}[new Intl.PluralRules('ru').select(n)] || 'оценок');
+    document.querySelector('#ratingBox').hidden = false;
+  }
+  if (aspects) {
+    const topics = document.querySelector('#topics');
+    topics.replaceChildren();
+    for (const a of aspects.filter(a => a.count > 0)) {
+      const chip = document.createElement('div');
+      const pct = document.createElement('em');
+      pct.textContent = Math.round(a.positive / a.count * 100) + '%';
+      const count = document.createElement('small');
+      const form = new Intl.PluralRules('ru').select(a.count);
+      count.textContent = a.count + ' ' + ({one:'отзыв',few:'отзыва',many:'отзывов'}[form] || 'отзывов');
+      pct.append(' ', document.querySelector('#like').content.cloneNode(true));
+      chip.append(a.text + ' · ', pct, count);
+      topics.append(chip);
+    }
+  }
+  for (const review of reviews) {
+    if (review.id && seen.has(review.id)) continue;
+    seen.add(review.id);
+    const card = document.createElement('article');
+    const head = document.createElement('header');
+    const author = document.createElement('strong');
+    const date = document.createElement('small');
+    const text = document.createElement('p');
+    author.textContent = review.author;
+    date.textContent = review.date;
+    text.textContent = review.text || ('Оценка: ' + review.rating + ' из 5');
+        const avatar = document.createElement('span');
+    avatar.className = 'avatar';
+    avatar.textContent = review.author.trim().slice(0,1);
+    const stars = document.createElement('b');
+    stars.textContent = '★'.repeat(Math.max(0, Math.min(5, Math.round(Number(review.rating) || 0))));
+    stars.setAttribute('aria-label', review.rating + ' из 5');
+        if (review.avatar) {
+      const img = new Image();
+      img.className = 'avatar';
+      img.loading = 'lazy';
+      img.alt = '';
+      img.src = review.avatar;
+      img.onerror = () => img.replaceWith(avatar);
+      head.append(img);
+    } else head.append(avatar);
+    const identity = document.createElement('div');
+    identity.className = 'identity';
+    const caption = document.createElement('small');
+    caption.textContent = review.caption || '';
+    identity.append(author, caption);
+    head.append(identity);
+    const details = document.createElement('div');
+    details.className = 'details';
+    details.append(stars, date);
+    card.append(head, details, text);
+    feed.append(card);
+    text.classList.add('collapsed');
+    if (text.scrollHeight > text.clientHeight + 1) {
+      const expand = document.createElement('button');
+      expand.className = 'expand';
+      expand.textContent = 'ещё';
+      expand.onclick = () => { text.classList.remove('collapsed'); expand.remove(); };
+      card.append(expand);
+    }
+    const url = 'https://yandex.ru/maps/org/' + org + '/reviews/?reviews%5BpublicId%5D=' + encodeURIComponent(review.id);
+    const actions = document.createElement('div');
+    actions.className = 'actions';
+    for (const [icon, value, label] of [['like',review.likes,'Лайк'],['share','','Поделиться']]) {
+      const link = document.createElement('a');
+      link.href = url;
+      link.target = '_blank';
+      link.setAttribute('aria-label', label + ' в Яндекс Картах');
+      link.append(document.querySelector('#' + icon).content.cloneNode(true), String(value || ''));
+      if (icon === 'share' && navigator.share) link.onclick = e => { e.preventDefault(); navigator.share({url}).catch(()=>{}); };
+      actions.append(link);
+    }
+    card.append(actions);
+    if (review.answer) {
+      const answer = document.createElement('details');
+      answer.className = 'answer';
+      const summary = document.createElement('summary');
+      summary.textContent = 'Посмотреть ответ организации';
+      answer.append(summary, review.answer);
+      card.append(answer);
+    }
+  }
+    document.querySelector('#count').textContent = total;
+    document.querySelector('#total').textContent = total + ' ' + (new Intl.PluralRules('ru').select(total) === 'one' ? 'отзыв' : new Intl.PluralRules('ru').select(total) === 'few' ? 'отзыва' : 'отзывов');
+    offset = next;
+    status.textContent = 'Показано ' + feed.children.length + ' из ' + available;
+    more.hidden = next === null;
+  } catch {
+    status.textContent = 'Не удалось загрузить отзывы.';
+    more.textContent = 'Повторить';
+  } finally {
+    more.disabled = false;
+    loading = false;
+  }
+}
+const strip = document.querySelector('#topics');
+let drag = null;
+strip.addEventListener('pointerdown', e => {
+  if (e.pointerType !== 'mouse' || e.button !== 0) return;
+  drag = { x: e.clientX, left: strip.scrollLeft };
+  strip.setPointerCapture(e.pointerId);
+  strip.classList.add('dragging');
+});
+strip.addEventListener('pointermove', e => {
+  if (drag) strip.scrollLeft = drag.left + drag.x - e.clientX;
+});
+strip.addEventListener('lostpointercapture', () => {
+  drag = null;
+  strip.classList.remove('dragging');
+});
+strip.addEventListener('wheel', e => {
+  if (e.ctrlKey || e.shiftKey || Math.abs(e.deltaX) >= Math.abs(e.deltaY)) return;
+  const before = strip.scrollLeft;
+  strip.scrollLeft += e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? strip.clientWidth : 1);
+  if (strip.scrollLeft !== before) e.preventDefault();
+}, { passive: false });
+more.addEventListener('click', load);
+new IntersectionObserver(([entry]) => {
+  if (entry.isIntersecting) load();
+}, { root: document.querySelector('.scroll'), rootMargin: '150px' }).observe(more);
+</script></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
