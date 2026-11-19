@@ -36,6 +36,15 @@ article,.identity strong,article p{font-size:16px;line-height:20px}.identity sma
 <div id="topics" class="topics" tabindex="0" role="region" aria-label="Темы отзывов"></div><div class="scroll" tabindex="0" aria-label="Лента отзывов"><section id="feed"></section><small id="status" role="status">Загружаем отзывы…</small> <button id="more">Показать еще</button></div>
 <footer><a href="https://yandex.ru/maps/org/1012232570/reviews/" target="_blank">✎ Добавить отзыв</a></footer></section></div>
 </main><script type="module">
+const allowedOrigins = [];
+if (allowedOrigins.length && window.parent !== window) {
+  const ancestors = Array.from(location.ancestorOrigins || []);
+  if (!ancestors.length && document.referrer) ancestors.push(new URL(document.referrer).origin);
+  if (!ancestors.length || ancestors.some(origin => !allowedOrigins.includes(origin))) {
+    document.querySelector('.stage').remove();
+    throw new Error('Embedding disabled on this domain');
+  }
+}
 const params = new URLSearchParams(location.search);
 const org = params.get('org') ?? '1012232570';
 const validOrg = /^\d{1,20}$/.test(org);
@@ -203,6 +212,7 @@ new IntersectionObserver(([entry]) => {
   if (entry.isIntersecting) load();
 }, { root: document.querySelector('.scroll'), rootMargin: '150px' }).observe(more);
 </script></html>
+
 
 
 
