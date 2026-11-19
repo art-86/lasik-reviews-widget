@@ -28,15 +28,15 @@ article,.identity strong,article p{font-size:16px;line-height:20px}.identity sma
 .glass{left:35.55%;top:5.65%;width:34.72%;height:80.6%;border-radius:4.5cqw;clip-path:inset(0 round 4.5cqw);background:#fff}
 .screen:before{content:"Я Карты";background:#171717;color:white;text-align:center;padding:5px;font-size:12px;font-weight:500;flex:none}
 .screen:after{content:"";height:4px;width:34%;margin:5px auto 8px;background:#151515;border-radius:4px;flex:none}
-.scroll{overflow:hidden;overscroll-behavior-y:auto;scrollbar-width:thin}
-.screen.reading .scroll{overflow-y:auto}
-.screen.reading .scroll::-webkit-scrollbar{display:block;width:4px}
-.screen.reading .scroll::-webkit-scrollbar-thumb{background:#b5b9be;border-radius:4px}
+.scroll{overscroll-behavior-y:auto;scrollbar-width:thin}
+.scroll{overflow-y:auto}
+.scroll::-webkit-scrollbar{display:block;width:4px}
+.scroll::-webkit-scrollbar-thumb{background:#b5b9be;border-radius:4px}
 .topics{touch-action:pan-x pan-y}
 footer{display:flex;align-items:center;gap:10px}
-#read-toggle{font:500 16px/20px 'YS Text',Arial,sans-serif;border:0;border-radius:12px;background:#1977f3;color:white;min-height:44px;padding:8px 13px;cursor:pointer}
+.scroll-hint{font-size:15px;color:#59636c;margin-right:auto}
 footer a{background:transparent;color:#2468ba;padding:8px 0}
-#read-toggle:focus-visible{outline:3px solid #103d83;outline-offset:2px}
+
 /* Align the live screen with the original 500 x 684 phone photograph. */
 html.compact-widget body{width:min(100%,var(--device-width));margin:0;overflow-x:clip}
 html.compact-widget .stage{width:min(100%,73.09svh);aspect-ratio:500/684;left:auto;transform:none;margin:0 auto}
@@ -48,8 +48,8 @@ html.compact-widget .glass{left:12.91%;top:1.53%;width:46.92%;height:74.5%;borde
 <div class="title"><strong><span id="org-name">Отзывы</span> <span style="white-space:nowrap"><a href="https://yandex.ru/maps/org/1012232570/" target="_blank" aria-label="Открыть карточку">↗</a></span></strong></div>
 <nav class="tabs"><a href="https://yandex.ru/maps/org/1012232570/" target="_blank">Обзор</a><a href="https://yandex.ru/maps/org/1012232570/prices/" target="_blank">Товары и услуги</a><a href="https://yandex.ru/maps/org/1012232570/gallery/" target="_blank">Фото</a><strong>Отзывы <small id="count"></small></strong></nav>
 <div id="ratingBox" class="rating-box" hidden><div class="score"><strong id="score"></strong><span><b aria-hidden="true">★★★★★</b><span id="votes"></span></span></div><a class="rate" target="_blank" href="https://yandex.ru/maps/org/1012232570/reviews/"><span>Оцените<br>это место</span><b aria-hidden="true">★★★★★</b></a></div><div class="counts"><strong id="total">Отзывы</strong></div>
-<div id="topics" class="topics" tabindex="0" role="region" aria-label="Темы отзывов"></div><div id="review-list" class="scroll" inert tabindex="0" aria-label="Лента отзывов"><section id="feed"></section><small id="status" role="status">Загружаем отзывы…</small> <button id="more">Показать еще</button></div>
-<footer><button type="button" id="read-toggle" aria-controls="review-list" aria-pressed="false">↕ Листать отзывы</button><a href="https://yandex.ru/maps/org/1012232570/reviews/" target="_blank">✎ Добавить отзыв</a></footer></section></div>
+<div id="topics" class="topics" tabindex="0" role="region" aria-label="Темы отзывов"></div><div id="review-list" class="scroll" tabindex="0" aria-label="Лента отзывов"><section id="feed"></section><small id="status" role="status">Загружаем отзывы…</small> <button id="more">Показать еще</button></div>
+<footer><span class="scroll-hint">Листайте отзывы ↕</span><a href="https://yandex.ru/maps/org/1012232570/reviews/" target="_blank">✎ Добавить отзыв</a></footer></section></div>
 </main><script type="module">
 const allowedOrigins = ["https://zrenie.lasik.ru"];
 if (allowedOrigins.length && window.parent !== window) {
@@ -88,28 +88,7 @@ fitScreen();
 new ResizeObserver(fitScreen).observe(glass);
 const feed = document.querySelector('#feed');
 const status = document.querySelector('#status');
-const pane = document.querySelector('#review-list');
-const toggle = document.querySelector('#read-toggle');
-function setReading(active) {
-  screen.classList.toggle('reading', active);
-  pane.inert = !active;
-  toggle.setAttribute('aria-pressed', String(active));
-  toggle.textContent = active ? '↩ К странице' : '↕ Листать отзывы';
-}
-toggle.addEventListener('click', () => {
-  const active = pane.inert;
-  setReading(active);
-  if (active) pane.focus({preventScroll:true});
-});
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && !pane.inert) {
-    setReading(false);
-    toggle.focus({preventScroll:true});
-  }
-});
-new IntersectionObserver(([entry]) => {
-  if (!entry.isIntersecting && !pane.inert) setReading(false);
-}).observe(pane);
+
 const more = document.querySelector('#more');
 let offset = 0;
 let loading = false;
@@ -248,7 +227,7 @@ strip.addEventListener('lostpointercapture', () => {
   strip.classList.remove('dragging');
 });
 strip.addEventListener('wheel', e => {
-  if (pane.inert || e.ctrlKey || e.shiftKey || Math.abs(e.deltaX) >= Math.abs(e.deltaY)) return;
+  if (e.ctrlKey || e.shiftKey || Math.abs(e.deltaX) >= Math.abs(e.deltaY)) return;
   const before = strip.scrollLeft;
   strip.scrollLeft += e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? strip.clientWidth : 1);
   if (strip.scrollLeft !== before) e.preventDefault();
@@ -258,6 +237,7 @@ new IntersectionObserver(([entry]) => {
   if (entry.isIntersecting) load();
 }, { root: document.querySelector('.scroll'), rootMargin: '150px' }).observe(more);
 </script></html>
+
 
 
 
