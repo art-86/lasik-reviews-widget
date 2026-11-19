@@ -9,7 +9,6 @@
 .tabs{justify-content:space-between;gap:5.6px;padding:11.2px 10.1px;font-size:12.9px;font-weight:bold}.tabs strong{border-bottom:3.9px solid #287de4;color:#1667b8;padding-bottom:5.6px}.tabs small{color:#777}.counts{justify-content:space-between;padding:12.3px 15.1px;font-size:15.1px}.counts span{color:#888;font-size:12.6px}
 .scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:none;border-block:1px solid #f3f3f3}.scroll::-webkit-scrollbar{display:none}
 article{padding:20.1px 15.1px 19px;border-bottom:1px solid #f2f2f2}header{gap:8.9px}.avatar{border-radius:50%;width:38px;height:38px;background:#e7f2f0;color:#47716b;display:grid;place-items:center;font-weight:bold}.details{gap:6.7px;margin:11.2px 0 5px}.details b{color:#ffc600}.details small,#status{color:#767676}article p{white-space:pre-line;line-height:1.25;margin:0;overflow-wrap:anywhere}
-footer{padding:8.9px 15.1px}footer a{display:inline-block;background:#1977f3;color:white;padding:11.2px 14.5px;border-radius:13.4px;text-decoration:none;font-size:14.5px}
 #more{font:inherit}#status{padding:8.9px}
 @media(max-width:600px){body{overflow-x:hidden}.stage{width:min(240vw,106.89svh);max-width:none;left:50%;transform:translateX(-50%);margin:0}}
 @font-face{font-family:'YS Text';src:url(https://maps.yastatic.net/s3/home/fonts/ys/4/text-regular.woff2)}@font-face{font-family:'YS Text';font-weight:500 700;src:url(https://maps.yastatic.net/s3/home/fonts/ys/4/text-medium.woff2)}
@@ -26,23 +25,21 @@ article,.identity strong,article p{font-size:16px;line-height:20px}.identity sma
 .stage:before{content:"";position:absolute;inset:21% 11% -8% 21%;border:2.15cqw solid #1d376d;border-radius:1.5cqw;z-index:-2}
 .stage:after{content:"";position:absolute;left:26%;top:4%;width:74%;aspect-ratio:500/684;background:url("./phone-original.png") top left/100% auto no-repeat;z-index:-1}
 .glass{left:35.55%;top:5.65%;width:34.72%;height:80.6%;border-radius:4.5cqw;clip-path:inset(0 round 4.5cqw);background:#fff}
-.screen:before{content:"Я Карты";background:#171717;color:white;text-align:center;padding:5px;font-size:12px;font-weight:500;flex:none}
+.screen:before{content:"Я Карты";align-self:center;margin:8px 0 0;padding:2px 9px;background:#171717;color:white;border-radius:12px;font:500 11px/14px 'YS Text',Arial,sans-serif;flex:none}
 .screen:after{content:"";height:4px;width:34%;margin:5px auto 8px;background:#151515;border-radius:4px;flex:none}
 .scroll{overscroll-behavior-y:auto;scrollbar-width:thin}
 .scroll{overflow-y:auto}
 .scroll::-webkit-scrollbar{display:block;width:4px}
 .scroll::-webkit-scrollbar-thumb{background:#b5b9be;border-radius:4px}
 .topics{touch-action:pan-x pan-y}
-footer{display:flex;align-items:center;gap:10px}
 
-footer a{background:transparent;color:#2468ba;padding:8px 0}
 
 /* Align the live screen with the original 500 x 684 phone photograph. */
 html.compact-widget body{width:min(100%,var(--device-width));margin:0;overflow-x:clip}
 html.compact-widget .stage{width:100%;height:min(100svh,200vw);aspect-ratio:auto;left:auto;transform:none;margin:0;--photo:min(183cqw,91svh)}
 html.compact-widget .stage:after{width:var(--photo);height:auto;aspect-ratio:500/684;top:4px;left:calc(50% - var(--photo)*.3637)}
 html.compact-widget .stage:before{inset:15% 3% -5% 2%;border-width:2cqw}
-html.compact-widget .glass{left:calc(50% - var(--photo)*.2346);top:calc(4px + var(--photo)*.0209);width:calc(var(--photo)*.4692);height:calc(var(--photo)*1.019);border-radius:calc(var(--photo)*.061);clip-path:inset(0 round calc(var(--photo)*.061))}
+html.compact-widget .glass{left:calc(50% - var(--photo)*.2346);top:calc(4px + var(--photo)*.0209);width:calc(var(--photo)*.4692);height:calc(var(--photo)*1.019);--corners:calc(var(--photo)*.076) calc(var(--photo)*.076) calc(var(--photo)*.061) calc(var(--photo)*.061);border-radius:var(--corners);clip-path:inset(0 round var(--corners))}
 html.compact-widget .screen{width:300px}
 html.compact-widget .score,html.compact-widget .rate{padding:8px;gap:5px}
 html.compact-widget .rate{flex-direction:column}
@@ -59,7 +56,7 @@ html.compact-widget .rating-box{margin:6px 12px}
 <nav class="tabs"><a href="https://yandex.ru/maps/org/1012232570/" target="_blank">Обзор</a><a href="https://yandex.ru/maps/org/1012232570/prices/" target="_blank">Товары и услуги</a><a href="https://yandex.ru/maps/org/1012232570/gallery/" target="_blank">Фото</a><strong>Отзывы <small id="count"></small></strong></nav>
 <div id="ratingBox" class="rating-box" hidden><div class="score"><strong id="score"></strong><span><b aria-hidden="true">★★★★★</b><span id="votes"></span></span></div><a class="rate" target="_blank" href="https://yandex.ru/maps/org/1012232570/reviews/"><span>Оцените<br>это место</span><b aria-hidden="true">★★★★★</b></a></div><div class="counts"><strong id="total">Отзывы</strong></div>
 <div id="topics" class="topics" tabindex="0" role="region" aria-label="Темы отзывов"></div><div id="review-list" class="scroll" tabindex="0" aria-label="Лента отзывов"><section id="feed"></section><small id="status" role="status">Загружаем отзывы…</small> <button id="more">Показать еще</button></div>
-<footer><a href="https://yandex.ru/maps/org/1012232570/reviews/" target="_blank">✎ Добавить отзыв</a></footer></section></div>
+</section></div>
 </main><script type="module">
 const allowedOrigins = ["https://zrenie.lasik.ru"];
 if (allowedOrigins.length && window.parent !== window) {
@@ -246,6 +243,7 @@ new IntersectionObserver(([entry]) => {
   if (entry.isIntersecting) load();
 }, { root: document.querySelector('.scroll'), rootMargin: '150px' }).observe(more);
 </script></html>
+
 
 
 
