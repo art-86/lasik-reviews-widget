@@ -76,7 +76,7 @@ function sizeEmbed() {
   // Older Zero Blocks can give the iframe a 560px viewport on a 320px phone.
   const width = Math.min(window.innerWidth, window.screen.width || window.innerWidth);
   document.documentElement.style.setProperty('--device-width', width + 'px');
-  document.documentElement.classList.toggle('compact-widget', width <= 480 ||
+  document.documentElement.classList.toggle('compact-widget', width <= 780 ||
     (width <= 640 && matchMedia('(pointer: coarse)').matches));
 }
 sizeEmbed();
@@ -242,6 +242,7 @@ new IntersectionObserver(([entry]) => {
   if (entry.isIntersecting) load();
 }, { root: document.querySelector('.scroll'), rootMargin: '150px' }).observe(more);
 </script></html>
+
 
 
 
