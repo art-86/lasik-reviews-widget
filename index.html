@@ -36,7 +36,7 @@ article,.identity strong,article p{font-size:16px;line-height:20px}.identity sma
 <div id="topics" class="topics" tabindex="0" role="region" aria-label="Темы отзывов"></div><div class="scroll" tabindex="0" aria-label="Лента отзывов"><section id="feed"></section><small id="status" role="status">Загружаем отзывы…</small> <button id="more">Показать еще</button></div>
 <footer><a href="https://yandex.ru/maps/org/1012232570/reviews/" target="_blank">✎ Добавить отзыв</a></footer></section></div>
 </main><script type="module">
-const allowedOrigins = [];
+const allowedOrigins = ["https://zrenie.lasik.ru"];
 if (allowedOrigins.length && window.parent !== window) {
   const ancestors = Array.from(location.ancestorOrigins || []);
   if (!ancestors.length && document.referrer) ancestors.push(new URL(document.referrer).origin);
