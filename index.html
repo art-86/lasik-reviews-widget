@@ -48,6 +48,11 @@ html.compact-widget .score,html.compact-widget .rate{padding:8px;gap:5px}
 html.compact-widget .rate{flex-direction:column}
 html.compact-widget .rate br{display:none}
 html.compact-widget .rating-box{margin:6px 12px}
+@media(min-width:781px){
+  html.compact-widget body{background:#fafafa}
+  html.compact-widget .stage{max-width:115svh;height:100svh;margin-inline:auto}
+  html.compact-widget .screen{width:360px}
+}
 </style>
 <template id="like"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M22 11.5c0-2.097-1.228-3.498-3.315-3.498h-2.918Q15.9 6.624 15.9 5.5c0-1.963-1.81-3.5-3.64-3.5-1.414 0-1.81.81-2.049 2.683-.003.03-.094.762-.125.995-.055.407-.112.77-.182 1.133-.273 1.414-.989 2.944-1.727 3.841a2.3 2.3 0 0 0-.456-.318C7.314 10.116 6.838 10 6.153 10h-.306c-.685 0-1.16.116-1.568.334a2.27 2.27 0 0 0-.945.945c-.218.407-.334.883-.334 1.568v5.306c0 .685.116 1.16.334 1.568.218.407.538.727.945.945S5.162 21 5.847 21h.306c.685 0 1.16-.116 1.568-.334q.353-.19.615-.477c.697.525 1.68.811 2.985.811h4.452c1.486 0 2.565-.553 3.253-1.487.284-.384.407-.652.597-1.166a.8.8 0 0 1 .162-.214c.026-.028.11-.112.208-.21.135-.134.296-.295.369-.373.323-.346.576-.69.782-1.103.357-.713.406-1.258.337-2.173-.026-.35-.027-.464-.008-.542.034-.145.075-.265.147-.447l.066-.166c.22-.552.314-.971.314-1.619m-9.932-5.555c.034-.251.129-1.018.127-1.009.062-.483.114-.768.168-.932.76.059 1.537.75 1.537 1.496q0 1.433-.242 3.378a1 1 0 0 0 .992 1.124h4.035c.92 0 1.315.451 1.315 1.498 0 .37-.04.547-.173.881l-.066.167a5 5 0 0 0-.234.72c-.084.356-.083.586-.04 1.156.044.582.022.822-.131 1.129a2.6 2.6 0 0 1-.455.63c-.04.044-.148.152-.262.266-.129.128-.265.264-.319.322-.266.286-.451.554-.573.882-.128.345-.192.486-.33.674-.314.425-.798.673-1.644.673H11.32c-1.833 0-2.317-.568-2.317-2v-4.35c1.31-1.104 2.458-3.356 2.864-5.46.077-.405.14-.803.2-1.245m-6.846 6.153c.116-.062.278-.098.625-.098h.306c.347 0 .509.036.625.098a.28.28 0 0 1 .124.124c.062.116.098.277.098.625v5.306c0 .348-.036.509-.098.625a.28.28 0 0 1-.124.125c-.116.061-.278.097-.625.097h-.306c-.347 0-.509-.036-.625-.098a.28.28 0 0 1-.124-.124C5.036 18.662 5 18.5 5 18.153v-5.306c0-.348.036-.509.098-.625a.28.28 0 0 1 .124-.124" clip-rule="evenodd"/></svg></template><template id="share"><svg width="24" height="24"></svg></template><main class="stage"><div class="glass"><section class="screen" aria-label="Отзывы в экране телефона">
 <div class="title"><strong><span id="org-name">Отзывы</span> <span style="white-space:nowrap"><a href="https://yandex.ru/maps/org/1012232570/" target="_blank" aria-label="Открыть карточку">↗</a></span></strong></div>
@@ -76,8 +81,7 @@ function sizeEmbed() {
   // Older Zero Blocks can give the iframe a 560px viewport on a 320px phone.
   const width = Math.min(window.innerWidth, window.screen.width || window.innerWidth);
   document.documentElement.style.setProperty('--device-width', width + 'px');
-  document.documentElement.classList.toggle('compact-widget', width <= 780 ||
-    (width <= 640 && matchMedia('(pointer: coarse)').matches));
+  document.documentElement.classList.add('compact-widget');
 }
 sizeEmbed();
 window.addEventListener('resize', sizeEmbed);
@@ -242,6 +246,7 @@ new IntersectionObserver(([entry]) => {
   if (entry.isIntersecting) load();
 }, { root: document.querySelector('.scroll'), rootMargin: '150px' }).observe(more);
 </script></html>
+
 
 
 
